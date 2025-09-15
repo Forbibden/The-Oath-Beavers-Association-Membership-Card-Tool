@@ -1,38 +1,103 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css?v=1.1">
-  <title>Üyelik Kartı Düzenleyici</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
+<meta charset="utf-8">
+<title>Üyelik Kartı Düzenleyici</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: #0a0a0a; /* siyah arka plan */
+  background: #0a0a0a;
   color: #f0f0f0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
+  padding-top: 20px;
 }
-#serviceInput {
-  width: 100%;
-  padding: 6px 8px;
-  margin-top: 4px;
-  border-radius: 6px;
-  border: 1px solid #333;
-  background: #0f0f0f;
-  color: #f0f0f0;
-  text-align: center;
-}
+
 .container {
   display: flex;
   gap: 20px;
-  justify-content: center; /* yatay ortala */
+  justify-content: center;
   align-items: flex-start;
 }
 
+/* Bilgilendirme Paneli */
+.info-box {
+  background: #1a1a1a;
+  border-radius: 8px;
+  width: 320px;
+  overflow: hidden;
+  position: relative;
+  font-size: 13px;
+}
+
+.info-header {
+  background: #1a1a1a;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  cursor: default;
+  color: cadetblue;
+}
+
+.info-toggle {
+  background: cadetblue; /* mavi vurgu */
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.info-toggle:hover {
+  background: #2563eb;
+}
+
+.info-toggle span {
+  font-size: 18px;
+  color: #fff;
+}
+
+.info-content {
+  display: none;
+  padding: 12px;
+  color: #ddd;
+  line-height: 1.4;
+}
+
+.info-content .command {
+  color: #fff;
+  font-weight: 800;
+}
+
+.info-content .notf {
+  color: #5e5e5e;
+  font-style: italic;
+}
+
+.info-content a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.note {
+  background: rgb(219, 64, 64);
+  border-radius: 20px;
+  font-size: 12px;
+  color: #ddd;
+  margin-top: 12px;
+  text-align: center;
+  padding: 6px 12px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #333;
+}
+
+/* Kart Panel */
 .panel {
   background: #1a1a1a;
   padding: 20px;
@@ -40,7 +105,7 @@ body {
   width: 280px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* panel içeriğini ortala */
+  align-items: center;
 }
 
 .panel h1 {
@@ -55,10 +120,10 @@ label {
   margin-top: 10px;
   color: #cccccc;
   width: 100%;
-  text-align: center; /* label ortalansın */
+  text-align: center;
 }
 
-input {
+input, select {
   width: 100%;
   padding: 6px 8px;
   margin-top: 4px;
@@ -66,10 +131,10 @@ input {
   border: 1px solid #333;
   background: #0f0f0f;
   color: #f0f0f0;
-  text-align: center; /* input içeriği ortalanmış */
+  text-align: center;
 }
 
-input:focus {
+input:focus, select:focus {
   outline: 1px solid #555;
 }
 
@@ -83,19 +148,6 @@ button {
   color: #f0f0f0;
   font-weight: bold;
   width: 100%;
-}
-
-.note {
-  background: cadetblue;
-  border-radius: 20px;
-  font-size: 12px;
-  color: #ddd;
-  margin-top: 12px;
-  text-align: center;
-  padding: 6px 12px;
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid #333;
 }
 
 .preview {
@@ -114,134 +166,158 @@ canvas {
   height: auto;
   border-radius: 6px;
 }
-
-.logo {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 50px;
-  height: auto;
-}
 </style>
-
-
-
-
-
 </head>
 <body>
 <div class="container">
+
+  <!-- Bilgilendirme Paneli -->
+  <div class="info-box">
+    <div class="info-header">Bilgilendirme</div>
+    <div class="info-toggle"><span>▼</span></div>
+    <div class="info-content">
+      <p>
+        <span class="command">/myitemsex</span><br>
+        <span class="notf">''note kağıdının envanterinizde hangi numarada olduğunu öğrenin''</span><br><br>
+
+        <span class="command">/note x 1 ad The Oath Beavers - Üyelik Kartı</span><br>
+        <span class="notf">''x olan kısma envanterinizde note hangisindeyse onu yapın, unutmayın "The Oath Beavers - Üyelik Kartı" kartın adı bu olmak zorunda.''</span><br><br>
+
+        <span class="command">/iconpicker</span><br>
+        <span class="notf">"yazdıktan sonra önünüze gelen menüde "Diğer" kısmında yer alan üçüncü satırın soldan 4. simgeyi seçin."</span><br>
+        <a href="https://i.imgur.com/GnqvfVc.png" target="_blank">Simge Görseli</a><br><br>
+
+        <span class="command">/note x 1 ikon</span><br>
+        <span class="notf">"bu komut iconpickerdan seçtiğiniz ikonu değiştirmenizi sağlar"</span><br><br>
+
+        <span class="command">/note x 1 içerik</span><br>
+        <span class="notf">"burada olan imgur linkini sizin için hazırladığımız kart linkiyle değiştirin"</span><br><br>
+
+        <span class="command">ID</span><br>
+        <span class="notf">"Bu alan yalnızca Ticket numarası ile doldurulmalıdır. Örneğin, 'Ticket-002' veya 'SNPCE-ticket-ticketno-günayyıl-[durum]' formatında görünür. Buradaki 'ticketno' sizin ID’nizi temsil eder."</span><br><br>
+
+        <p style="background-color: black; padding: 3px; color: #C2A2DA;">
+        The Outh Beavers Association tarafından adresinize kargolanmış bir zarf. Zarf içerisinde bir kart ve bu bilgilendirme mesajını görmektesiniz.
+        
+    </p>
+        <p class="note">Her kullanıcı yalnızca bir kart sahibi olabilir.</p>
+      </p>
+    </div>
+  </div>
+
+  <!-- Kart Paneli -->
   <div class="panel">
-    <h1>Kart Bilgileri</h1>
+    <h1 style="color: cadetblue;">Kart Bilgileri</h1>
     <label>Fotoğraf</label>
     <input type="file" id="photoInput" accept="image/*">
-
     <label>İsim</label>
     <input type="text" id="nameInput" placeholder="Ad Soyad">
-
     <label>Cinsiyet</label>
-    <input type="text" id="sexInput" placeholder="Sex">
     <select id="sexInput">
-         <option value="">Sex</option>
-         <option value="Female">Female</option>
-        <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Male">Male</option>
     </select>
     <label>Servis</label>
     <select id="serviceInput">
-    <option value="">Service</option>
-    <option value="District Attorney’s Office">District Attorney’s Office</option>
-    <option value="LS County Sheriff's Department">LS County Sheriff's Department</option>
-    <option value="LS Police Department">LS Police Department</option>
-    <option value="LS Fire Department">LS Fire Department</option>
-    <option value="SA Department of Corrections">SA Department of Corrections</option>
+      <option value="District Attorney’s Office">District Attorney’s Office</option>
+      <option value="LS County Sheriff's Department">LS County Sheriff's Department</option>
+      <option value="LS Police Department">LS Police Department</option>
+      <option value="LS Fire Department">LS Fire Department</option>
+      <option value="SA Department of Corrections">SA Department of Corrections</option>
     </select>
-
-    <label>ID No</label>
-    <input type="text" id="idInput" placeholder="ID No">
-
-    <button id="updateBtn">Önizle</button>
-    <button id="downloadBtn">PNG İndir</button>
-    <div class="note">Sağ tıklayıp resmi kaydetmeniz de mümkün.</div>
+    <label for="">ID</label>
+    <input type="text" id="idInput" placeholder="Yanlızca Ticket NO">
+    <button id="updateBtn" style="background-color: cadetblue;">Önizle</button>
+    <button id="downloadBtn" style="background-color: rgb(51, 145, 51);">PNG İndir</button>
   </div>
 
+  <!-- Önizleme -->
   <div class="preview">
     <canvas id="cardCanvas"></canvas>
   </div>
+
 </div>
+
 <script>
-  const canvas = document.getElementById('cardCanvas');
-  const ctx = canvas.getContext('2d');
+const toggle = document.querySelector('.info-toggle');
+const content = document.querySelector('.info-content');
 
-  const nameInput = document.getElementById('nameInput');
-  const sexInput = document.getElementById('sexInput');
-  const serviceInput = document.getElementById('serviceInput');
-  const idInput = document.getElementById('idInput');
-  const photoInput = document.getElementById('photoInput');
+toggle.addEventListener('click', () => {
+  content.style.display = 'block';
+  toggle.style.display = 'none';
+});
 
-  let photoImg = null;
-  let templateImg = new Image();
+// Canvas işlemleri
+const canvas = document.getElementById('cardCanvas');
+const ctx = canvas.getContext('2d');
 
-  templateImg.onload = () => {
-    // Canvas boyutu şablonun orijinal boyutu ile aynı olacak
-    canvas.width = templateImg.width;
-    canvas.height = templateImg.height;
-    render();
-  };
-  templateImg.src = "sablon.png";
+const nameInput = document.getElementById('nameInput');
+const sexInput = document.getElementById('sexInput');
+const serviceInput = document.getElementById('serviceInput');
+const idInput = document.getElementById('idInput');
+const photoInput = document.getElementById('photoInput');
 
-  function render(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.drawImage(templateImg,0,0);
+let photoImg = null;
+let templateImg = new Image();
 
-    // Fotoğraf alanı — koordinatlar orijinal ölçüye göre
-    if(photoImg){
-      const x=392,y=794.3,w=348,h=470;
-      ctx.save();
-      ctx.beginPath(); ctx.rect(x,y,w,h); ctx.clip();
-      drawImageCover(ctx,photoImg,x,y,w,h);
-      ctx.restore();
-    }
+templateImg.onload = () => {
+  canvas.width = templateImg.width;
+  canvas.height = templateImg.height;
+  render();
+};
+templateImg.src = "sablon.png";
 
-    ctx.fillStyle = '#000';
-    ctx.textBaseline = 'top';
+function render() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(templateImg,0,0);
 
-    ctx.font = 'bold 40px Arial';
-    ctx.fillText(nameInput.value || '', 1000, 820);
-
-    ctx.font = '40px Arial';
-    ctx.fillText(sexInput.value || '', 1000, 867);
-    ctx.fillText(serviceInput.value || '', 1000, 910);
-    ctx.fillStyle = '#ff0000d9';
-    ctx.fillText(idInput.value || '', 1000, 955);
+  if(photoImg){
+    const x=392,y=794.3,w=348,h=470;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x,y,w,h);
+    ctx.clip();
+    drawImageCover(ctx,photoImg,x,y,w,h);
+    ctx.restore();
   }
 
-  function drawImageCover(ctx,img,x,y,w,h){
-    const iw=img.width, ih=img.height;
-    const r=Math.max(w/iw,h/ih);
-    const nw=iw*r, nh=ih*r;
-    const cx=(nw-w)/2, cy=(nh-h)/2;
-    ctx.drawImage(img,-cx+x,-cy+y,nw,nh);
-  }
+  ctx.fillStyle = '#000';
+  ctx.textBaseline = 'top';
+  ctx.font = 'bold 40px Arial';
+  ctx.fillText(nameInput.value || '', 1000, 820);
+  ctx.font = '40px Arial';
+  ctx.fillText(sexInput.value || '', 1000, 867);
+  ctx.fillText(serviceInput.value || '', 1000, 910);
+  ctx.fillStyle = '#ff0000d9';
+  ctx.fillText(idInput.value || '', 1000, 955);
+}
 
-  photoInput.addEventListener('change', e=>{
-    const f=e.target.files[0]; if(!f) return;
-    const url=URL.createObjectURL(f);
-    const img=new Image();
-    img.onload=()=>{photoImg=img; render();};
-    img.src=url;
+function drawImageCover(ctx,img,x,y,w,h){
+  const iw=img.width, ih=img.height;
+  const r=Math.max(w/iw,h/ih);
+  const nw=iw*r, nh=ih*r;
+  const cx=(nw-w)/2, cy=(nh-h)/2;
+  ctx.drawImage(img,-cx+x,-cy+y,nw,nh);
+}
+
+photoInput.addEventListener('change', e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const url=URL.createObjectURL(f);
+  const img=new Image();
+  img.onload=()=>{photoImg=img; render();};
+  img.src=url;
+});
+
+document.getElementById('updateBtn').addEventListener('click',render);
+document.getElementById('downloadBtn').addEventListener('click',()=>{
+  canvas.toBlob(blob=>{
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='uyelik-karti.png';
+    a.click();
+    URL.revokeObjectURL(a.href);
   });
-
-  document.getElementById('updateBtn').addEventListener('click',render);
-
-  document.getElementById('downloadBtn').addEventListener('click',()=>{
-    canvas.toBlob(blob=>{
-      const a=document.createElement('a');
-      a.href=URL.createObjectURL(blob);
-      a.download='uyelik-karti.png';
-      a.click();
-      URL.revokeObjectURL(a.href);
-    });
-  });
+});
 </script>
 </body>
 </html>
