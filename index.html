@@ -15,7 +15,16 @@ body {
   align-items: center;
   min-height: 100vh;
 }
-
+#serviceInput {
+  width: 100%;
+  padding: 6px 8px;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #0f0f0f;
+  color: #f0f0f0;
+  text-align: center;
+}
 .container {
   display: flex;
   gap: 20px;
@@ -131,9 +140,16 @@ canvas {
 
     <label>Cinsiyet</label>
     <input type="text" id="sexInput" placeholder="Sex">
-
+    
     <label>Servis</label>
-    <input type="text" id="serviceInput" placeholder="Service">
+    <select id="serviceInput">
+    <option value="">Service</option>
+    <option value="District Attorney’s Office">District Attorney’s Office</option>
+    <option value="LS County Sheriff's Department">LS County Sheriff's Department</option>
+    <option value="LS Police Department">LS Police Department</option>
+    <option value="LS Fire Department">LS Fire Department</option>
+    <option value="SA Department of Corrections">SA Department of Corrections</option>
+    </select>
 
     <label>ID No</label>
     <input type="text" id="idInput" placeholder="ID No">
