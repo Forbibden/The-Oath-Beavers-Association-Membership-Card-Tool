@@ -312,13 +312,13 @@ photoInput.addEventListener('change', e=>{
 
 document.getElementById('updateBtn').addEventListener('click',render);
 document.getElementById('downloadBtn').addEventListener('click',()=>{
-  canvas.toBlob(blob=>{
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download=`${nameInput.value}-The Oath Beavers Association.png`;
-    a.click();
-    URL.revokeObjectURL(a.href);
-  });
+  canvas.toBlob(blob => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${nameInput.value}-The Oath Beavers Association.png`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}, 'image/png');
 });
 </script>
 </body>
