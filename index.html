@@ -30,7 +30,7 @@ body {
 .info-box {
   background: #1a1a1a;
   border-radius: 8px;
-  width: 320px;
+  width: 350px;
   overflow: hidden;
   position: relative;
   font-size: 13px;
@@ -71,34 +71,77 @@ body {
   line-height: 1.4;
 }
 
-.info-content .command {
-  color: #fff;
-  font-weight: 800;
-}
+.command {
+      display: inline-block;
+      border-radius: 5px;
+      padding: 4px 10px;
+      font-weight: bold;
+      background-color: #16a085; /* koyu cyan */
+      color: #fff;
+      margin-bottom: 6px;
+    }
 
-.info-content .notf {
-  color: #5e5e5e;
-  font-style: italic;
-}
+    .command i {
+      margin-right: 6px;
+    }
 
-.info-content a {
-  color: #3b82f6;
-  text-decoration: underline;
-}
+    .notf {
+      display: block;
+      background-color: #1c1c1c;
+      color: #dcdcdc;
+      padding: 10px 12px;
+      border-left: 4px solid #16a085;
+      border-radius: 4px;
+      margin: 8px 0 16px 0;
+      font-size: 14px;
+    }
 
-.note {
-  background: rgb(219, 64, 64);
-  border-radius: 20px;
-  font-size: 12px;
-  color: #ddd;
-  margin-top: 12px;
-  text-align: center;
-  padding: 6px 12px;
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid #333;
-}
+    a {
+      color: #1abc9c; /* Turkuaz */
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #48c9b0;
+    }
 
+    .warning {
+      background-color: #e67e22;
+      color: #fff;
+    }
+
+    .warning-box {
+      background-color: #1c1c1c;
+      color: #f1f1f1;
+      padding: 12px;
+      border: 2px solid #e67e22;
+      border-radius: 5px;
+      margin: 10px 0 20px 0;
+      font-size: 14px;
+    }
+
+    .footer {
+      background-color: #111;
+      padding: 8px;
+      color: #C2A2DA;
+      font-size: 13px;
+      border-radius: 4px;
+      margin-top: 20px;
+      border: 1px solid #333;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #999;
+      margin-top: 10px;
+      font-style: italic;
+    }
+hr {
+      border: none;
+      border-top: 1px solid #333;
+      margin: 20px 0;
+    }
 /* Kart Panel */
 .panel {
   background: #1a1a1a;
@@ -179,38 +222,44 @@ canvas {
     <div class="info-toggle"><span>▼</span></div>
     <div class="info-content">
       <p>
-        <span class="command">/myitemsex</span><br>
-        <span class="notf">''note kağıdının envanterinizde hangi numarada olduğunu öğrenin''</span><br><br>
+    <span class="command"><i class="fa-solid fa-paperclip"></i>/myitemsex</span>
+    <span class="notf">''note kağıdının envanterinizde hangi numarada olduğunu öğrenin''</span>
 
-        <span class="command">/note x 1 ad The Oath Beavers - Üyelik Kartı</span><br>
-        <span class="notf">''x olan kısma envanterinizde note hangisindeyse onu yapın, unutmayın "The Oath Beavers - Üyelik Kartı" kartın adı bu olmak zorunda.''</span><br><br>
+    <span class="command"><i class="fa-solid fa-paperclip"></i>/note x 1 ad The Oath Beavers - Üyelik Kartı</span>
+    <span class="notf">''x olan kısma envanterinizde note hangisindeyse onu yapın, unutmayın "The Oath Beavers - Üyelik Kartı" kartın adı bu olmak zorunda.''</span>
 
-        <span class="command">/iconpicker</span><br>
-        <span class="notf">"yazdıktan sonra önünüze gelen menüde "Diğer" kısmında yer alan üçüncü satırın soldan 4. simgeyi seçin."</span><br>
-        <a href="https://i.imgur.com/GnqvfVc.png" target="_blank" style="color: cadetblue; text-decoration: none;">Simge Görseli</a><br><br>
+    <span class="command"><i class="fa-solid fa-paperclip"></i>/iconpicker</span>
+    <span class="notf">"yazdıktan sonra önünüze gelen menüde 'Diğer' kısmında yer alan üçüncü satırın soldan 4. simgeyi seçin."</span>
+    <a href="https://i.imgur.com/GnqvfVc.png" target="_blank">Simge Görseli</a><br><br>
 
-        <span class="command">/note x 1 ikon</span><br>
-        <span class="notf">"bu komut iconpickerdan seçtiğiniz ikonu değiştirmenizi sağlar"</span><br><br>
+    <span class="command"><i class="fa-solid fa-paperclip"></i>/note x 1 ikon</span>
+    <span class="notf">"bu komut iconpickerdan seçtiğiniz ikonu değiştirmenizi sağlar"</span>
 
-        <span class="command">/note x 1 içerik</span><br>
-        <span class="notf">"burada olan imgur linkini sizin için hazırladığımız kart linkiyle değiştirin"</span>
-        <hr>
-        <span class="command" style="background-color: #f39c12; color: #fff; padding: 2px 8px; border-radius: 5px; font-weight: bold;"><i class="fa-solid fa-triangle-exclamation" style="margin-right: 5px;"></i>ID</span><br>
-        <p style="background-color: #2c3e50; color: #ecf0f1; padding: 10px; border: 3px solid #34495e; border-radius: 5px;">"Bu alan yalnızca Ticket numarası ile doldurulmalıdır. Örneğin, 'Ticket-002' veya 'SNPCE-ticket-ticketno-günayyıl-[durum]' formatında görünür. Buradaki 'ticketno' sizin ID’nizi temsil eder."</p>
+    <span class="command"><i class="fa-solid fa-paperclip"></i>/note x 1 içerik</span>
+    <span class="notf">"burada olan imgur linkini sizin için hazırladığımız kart linkiyle değiştirin"</span>
 
-         <span class="command" style="background-color: #f39c12; color: #fff; padding: 2px 8px; border-radius: 5px; font-weight: bold;"><i class="fa-solid fa-triangle-exclamation" style="margin-right: 5px;"></i>Beyaz Arkaplan</span>  
-         <p class="notf" style="background-color: #2c3e50; color: #ecf0f1; padding: 10px; border: 3px solid #34495e; border-radius: 5px;">
-            "<a href="https://imgur.com" style="color: #1abc9c; text-decoration: none;">imgur.com</a> 
-            sitesine kayıt olarak sorunsuz bir şekilde oyun içerisinde kartınızı oluşturabilirsiniz. 
-            Kartınız beyaz bir arka plandaysa, elde ettiğiniz dosyayı 1000x1000 olacak şekilde yeniden boyutlandırın 
-            daha sonra da upload edin."
-        </p>
-        <p style="background-color: black; padding: 3px; color: #C2A2DA;">
-        * The Outh Beavers Association tarafından adresinize kargolanmış bir zarf. Zarf içerisinde bir kart ve bu bilgilendirme mesajını görmektesiniz.
-        
-    </p>
-        <p class="note">Her kullanıcı yalnızca bir kart sahibi olabilir.</p>
-      </p>
+    <hr>
+
+    <span class="command warning"><i class="fa-solid fa-triangle-exclamation"></i>ID</span>
+    <div class="notf" style="border-left: 4px solid #e67e22;">
+      "Bu alan yalnızca Ticket numarası ile doldurulmalıdır. Örneğin, 'Ticket-002' veya 
+      'SNPCE-ticket-ticketno-günayyıl-[durum]' formatında görünür. Buradaki 'ticketno' sizin ID’nizi temsil eder."
+    </div>
+
+    <span class="command warning"><i class="fa-solid fa-triangle-exclamation"></i>Beyaz Arkaplan</span>
+    <div class="notf" style="border-left: 4px solid #e67e22;">
+      "<a href="https://imgur.com">imgur.com</a> 
+      sitesine kayıt olarak sorunsuz bir şekilde oyun içerisinde kartınızı oluşturabilirsiniz. 
+      Kartınız beyaz bir arka plandaysa, elde ettiğiniz dosyayı 1000x1000 olacak şekilde yeniden boyutlandırın 
+      daha sonra da upload edin."
+    </div>
+
+    <div class="footer">
+      * The Outh Beavers Association tarafından adresinize kargolanmış bir zarf. Zarf içerisinde bir kart ve bu bilgilendirme mesajını görmektesiniz.
+    </div>
+
+    <p class="notf" style="border-left: 4px solid rgb(156, 31, 31);">Her kullanıcı yalnızca bir kart sahibi olabilir.</p>
+  </p>
     </div>
   </div>
 
