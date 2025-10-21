@@ -4,314 +4,161 @@
 <meta charset="utf-8">
 <title>The Oath Beavers Association - Membership Card Creator Tool</title>
 <link rel="icon" href="oath.png" type="image/png">
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
   margin: 0;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: #0a0a0a;
+  background: #0d0d0d;
   color: #f0f0f0;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
   min-height: 100vh;
-  padding-top: 20px;
 }
-
+.title{
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
 .container {
   display: flex;
+  flex-direction: column;
+  max-width: 800px;
   gap: 20px;
-  justify-content: center;
-  align-items: flex-start;
+  margin: auto;
 }
-
-/* Bilgilendirme Paneli */
-
-  .info-box {
-    background: #1a1a1a;
-    border-radius: 8px;
-    width: 330px;
-    overflow: hidden;
-    position: relative;
-    font-size: 13px;
-    flex-shrink: 0;      /* kutu boyutu küçülmesin */
-  }
-
-.info-header {
-  background: #1a1a1a;
-  padding: 12px;
-  text-align: center;
-  font-weight: bold;
-  cursor: default;
-  color: cadetblue;
-}
-
-.info-toggle {
-  background: cadetblue; /* mavi vurgu */
-  height: 25%;
+.card-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.info-toggle:hover {
-  background: #2563eb;
-}
-
-.info-toggle span {
-  font-size: 18px;
-  color: #fff;
-}
-
-.info-content {
-  display: none;
-  padding: 12px;
-  color: #ddd;
-  line-height: 1.4;
-}
-
-.command {
-      display: inline-block;
-      border-radius: 5px;
-      padding: 4px 10px;
-      font-weight: bold;
-      background-color: #16a085; /* koyu cyan */
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .command i {
-      margin-right: 6px;
-    }
-
-    .notf {
-      display: block;
-      background-color: #1c1c1c;
-      color: #dcdcdc;
-      padding: 10px 12px;
-      border-left: 4px solid #16a085;
-      border-radius: 4px;
-      margin: 8px 0 16px 0;
-      font-size: 14px;
-    }
-
-    a {
-      color: #1abc9c; /* Turkuaz */
-      text-decoration: none;
-      font-weight: bold;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: #48c9b0;
-    }
-
-    .warning {
-      background-color: #e67e22;
-      color: #fff;
-    }
-
-    .warning-box {
-      background-color: #1c1c1c;
-      color: #f1f1f1;
-      padding: 12px;
-      border: 2px solid #e67e22;
-      border-radius: 5px;
-      margin: 10px 0 20px 0;
-      font-size: 14px;
-    }
-
-    .footer {
-      background-color: #111;
-      padding: 8px;
-      color: #C2A2DA;
-      font-size: 13px;
-      border-radius: 4px;
-      margin-top: 20px;
-      border: 1px solid #333;
-    }
-
-    .note {
-      font-size: 13px;
-      color: #999;
-      margin-top: 10px;
-      font-style: italic;
-    }
-hr {
-      border: none;
-      border-top: 1px solid #333;
-      margin: 20px 0;
-    }
-/* Kart Panel */
-.panel {
+  gap: 20px;
   background: #1a1a1a;
+  border-radius: 12px;
   padding: 20px;
-  border-radius: 8px;
-  width: 280px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
+/* Kart stili genel */
+.card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* Kart Paneli */
+.panel {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 5px;
 }
 
-.panel h1 {
-  font-size: 18px;
-  margin-bottom: 12px;
-  text-align: center;
-  width: 100%;
-}
 
 label {
   font-size: 13px;
-  margin-top: 10px;
-  color: #cccccc;
-  width: 100%;
-  text-align: center;
+  margin-top: 6px;
+  color: #bbb;
 }
 
 input, select {
-  width: 100%;
-  padding: 6px 8px;
+  padding: 10px;
   margin-top: 4px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #333;
-  background: #0f0f0f;
+  background: #111;
   color: #f0f0f0;
-  text-align: center;
+  font-size: 14px;
+  transition: border 0.2s;
 }
-
 input:focus, select:focus {
-  outline: 1px solid #555;
+  border: 1px solid cadetblue;
+  outline: none;
 }
 
 button {
-  margin-top: 12px;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  background: #333;
-  color: #f0f0f0;
+  background: cadetblue;
+  color: #fff;
   font-weight: bold;
-  width: 100%;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #2891c7;
+}
+#downloadBtn {
+  background: #2e7d32;
+}
+#downloadBtn:hover {
+  background: #388e3c;
 }
 
+/* Önizleme */
 .preview {
+  flex: 1;
   background: #111;
-  padding: 12px;
-  border-radius: 8px;
-  width: 380px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  min-height: 520px;
 }
 
 canvas {
   max-width: 100%;
-  height: auto;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 </style>
 </head>
+
 <body>
 <div class="container">
+  <div class="card-section">
+    <div class="panel">
+        <span class="title"> Üyelik Kartı Oluştur</span>
+      <label>Fotoğraf</label>
+      <input type="file" id="photoInput" accept="image/*">
 
-  <!-- Bilgilendirme Paneli -->
-  <div class="info-box">
-    <div class="info-header">Bilgilendirme</div>
-    <div class="info-toggle"><span>▼</span></div>
-    <div class="info-content">
-      <p>
-    <span class="command"><i class="fa-solid fa-paperclip"></i>/myitemsex</span>
-    <span class="notf">''note kağıdının envanterinizde hangi numarada olduğunu öğrenin''</span>
+      <label>İsim</label>
+      <input type="text" id="nameInput" placeholder="Ad Soyad">
 
-    <span class="command"><i class="fa-solid fa-paperclip"></i>/note x 1 ad The Oath Beavers - Üyelik Kartı</span>
-    <span class="notf">''x olan kısma envanterinizde note hangisindeyse onu yapın, unutmayın "The Oath Beavers - Üyelik Kartı" kartın adı bu olmak zorunda.''</span>
+      <label>Cinsiyet</label>
+      <select id="sexInput">
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+      </select>
 
-    <span class="command"><i class="fa-solid fa-paperclip"></i>/iconpicker</span>
-    <span class="notf">"yazdıktan sonra önünüze gelen menüde 'Diğer' kısmında yer alan üçüncü satırın soldan 4. simgeyi seçin."</span>
-    <a href="https://i.imgur.com/GnqvfVc.png" target="_blank">Simge Görseli</a><br><br>
-
-    <span class="command"><i class="fa-solid fa-paperclip"></i>/note x 1 ikon</span>
-    <span class="notf">"bu komut iconpickerdan seçtiğiniz ikonu değiştirmenizi sağlar"</span>
-
-    <span class="command"><i class="fa-solid fa-paperclip"></i>/note x 1 içerik</span>
-    <span class="notf">"burada olan imgur linkini sizin için hazırladığımız kart linkiyle değiştirin"</span>
-
-    <hr>
-
-    <span class="command warning"><i class="fa-solid fa-triangle-exclamation"></i>ID</span>
-    <div class="notf" style="border-left: 4px solid #e67e22;">
-      "Bu alan yalnızca Ticket numarası ile doldurulmalıdır. Örneğin, 'Ticket-002' veya 
-      'SNPCE-ticket-ticketno-günayyıl-[durum]' formatında görünür. Buradaki 'ticketno' sizin ID’nizi temsil eder."
-    </div>
-
-    <span class="command warning"><i class="fa-solid fa-triangle-exclamation"></i>Beyaz Arkaplan</span>
-    <div class="notf" style="border-left: 4px solid #e67e22;">
-      "<a href="https://imgur.com">imgur.com</a> 
-      sitesine kayıt olarak sorunsuz bir şekilde oyun içerisinde kartınızı oluşturabilirsiniz. 
-      Kartınız beyaz bir arka plandaysa, elde ettiğiniz dosyayı 1000x1000 olacak şekilde yeniden boyutlandırın 
-      daha sonra da upload edin."
-    </div>
-
-    <div class="footer">
-      * The Outh Beavers Association tarafından adresinize kargolanmış bir zarf. Zarf içerisinde bir kart ve bir bilgilendirme mesajını görmektesiniz.
-    </div>
-
-    <p class="notf" style="border-left: 4px solid rgb(156, 31, 31);">Her kullanıcı yalnızca bir kart sahibi olabilir.</p>
-  </p>
-    </div>
-  </div>
-
-  <!-- Kart Paneli -->
-  <div class="panel">
-    <h1 style="color: cadetblue;">Kart Bilgileri</h1>
-    <label>Fotoğraf</label>
-    <input type="file" id="photoInput" accept="image/*">
-    <label>İsim</label>
-    <input type="text" id="nameInput" placeholder="Ad Soyad">
-    <label>Cinsiyet</label>
-    <select id="sexInput">
-      <option value="Female">Female</option>
-      <option value="Male">Male</option>
-    </select>
-    <label>Servis</label>
-    <select id="serviceInput">
+      <label>Servis</label>
+      <select id="serviceInput">
         <option value="District Attorney’s Office">District Attorney’s Office</option>
         <option value="LS County Sheriff's Department">LS County Sheriff's Department</option>
         <option value="LS Police Department">LS Police Department</option>
         <option value="LS Fire Department">LS Fire Department</option>
         <option value="SA Department of Corrections">SA Department of Corrections</option>
         <option value="LS City Government">LS City Government</option>
-    </select>
-    <label for="">ID</label>
-    <input type="text" id="idInput" placeholder="Yanlızca Ticket NO">
-    <button id="updateBtn" style="background-color: cadetblue;">Önizle</button>
-    <button id="downloadBtn" style="background-color: rgb(51, 145, 51);">PNG İndir</button>
-  </div>
+      </select>
 
-  <!-- Önizleme -->
-  <div class="preview">
-    <canvas id="cardCanvas"></canvas>
-  </div>
+      <label>ID</label>
+      <input type="text" id="idInput" placeholder="Yalnızca Ticket NO">
 
+      <button id="updateBtn" style="margin-top: 2rem;">Önizle</button>
+      <button id="downloadBtn">PNG İndir</button>
+    </div>
+
+    <div class="preview">
+      <canvas id="cardCanvas"></canvas>
+    </div>
+  </div>
 </div>
 
 <script>
-const toggle = document.querySelector('.info-toggle');
-const content = document.querySelector('.info-content');
-
-toggle.addEventListener('click', () => {
-  content.style.display = 'block';
-  toggle.style.display = 'none';
-});
-
 // Canvas işlemleri
 const canvas = document.getElementById('cardCanvas');
 const ctx = canvas.getContext('2d');
-
 const nameInput = document.getElementById('nameInput');
 const sexInput = document.getElementById('sexInput');
 const serviceInput = document.getElementById('serviceInput');
@@ -329,16 +176,16 @@ templateImg.onload = () => {
 templateImg.src = "sablon.png";
 
 function render() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.drawImage(templateImg,0,0);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(templateImg, 0, 0);
 
-  if(photoImg){
-    const x=392,y=794.3,w=348,h=470;
+  if (photoImg) {
+    const x = 392, y = 794.3, w = 348, h = 470;
     ctx.save();
     ctx.beginPath();
-    ctx.rect(x,y,w,h);
+    ctx.rect(x, y, w, h);
     ctx.clip();
-    drawImageCover(ctx,photoImg,x,y,w,h);
+    drawImageCover(ctx, photoImg, x, y, w, h);
     ctx.restore();
   }
 
@@ -353,31 +200,32 @@ function render() {
   ctx.fillText(idInput.value || '', 1000, 955);
 }
 
-function drawImageCover(ctx,img,x,y,w,h){
-  const iw=img.width, ih=img.height;
-  const r=Math.max(w/iw,h/ih);
-  const nw=iw*r, nh=ih*r;
-  const cx=(nw-w)/2, cy=(nh-h)/2;
-  ctx.drawImage(img,-cx+x,-cy+y,nw,nh);
+function drawImageCover(ctx, img, x, y, w, h) {
+  const iw = img.width, ih = img.height;
+  const r = Math.max(w / iw, h / ih);
+  const nw = iw * r, nh = ih * r;
+  const cx = (nw - w) / 2, cy = (nh - h) / 2;
+  ctx.drawImage(img, -cx + x, -cy + y, nw, nh);
 }
 
-photoInput.addEventListener('change', e=>{
-  const f=e.target.files[0]; if(!f) return;
-  const url=URL.createObjectURL(f);
-  const img=new Image();
-  img.onload=()=>{photoImg=img; render();};
-  img.src=url;
+photoInput.addEventListener('change', e => {
+  const f = e.target.files[0]; 
+  if (!f) return;
+  const url = URL.createObjectURL(f);
+  const img = new Image();
+  img.onload = () => { photoImg = img; render(); };
+  img.src = url;
 });
 
-document.getElementById('updateBtn').addEventListener('click',render);
-document.getElementById('downloadBtn').addEventListener('click',()=>{
+document.getElementById('updateBtn').addEventListener('click', render);
+document.getElementById('downloadBtn').addEventListener('click', () => {
   canvas.toBlob(blob => {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `${nameInput.value}-The Oath Beavers Association.png`;
-  a.click();
-  URL.revokeObjectURL(a.href);
-}, 'image/png');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${nameInput.value}-The Oath Beavers Association.png`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }, 'image/png');
 });
 </script>
 </body>
