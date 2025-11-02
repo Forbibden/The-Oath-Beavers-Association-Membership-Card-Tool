@@ -7,8 +7,7 @@ html, body {
 }
 html{
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-
+  scroll-snap-type: both mandatory;
 }
 section {
   scroll-snap-align: start;
@@ -27,7 +26,6 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh; /* tam ekran */
-  padding: 60px 0;
 }
 .page-wrapper {
   display: flex;
