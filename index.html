@@ -11,10 +11,13 @@
 
 <body>
 <div class="page-wrapper">
-
   <section class="hero-section">
+    <div class="warn-box">
+  <i class="fa-solid fa-circle-info"></i> 
+  Bu araç, "The Oath Beavers Association" üyelik kartlarını oluşturmak içindir. 
+  Her karakterin yanlızca bir adet "The Oath Beavers Association" üyelik kartı bulunabilir.
+</div>
     <div class="card-section">
-
     <!-- SOL TARAF: FORM PANELİ -->
     <div class="panel">
       <span class="title">Üyelik Kartı Oluştur</span>
@@ -56,21 +59,34 @@
   <!-- ÜYELİK KARTI OLUŞTURMA BÖLÜMÜ -->
    <section class="info-section">
     <div class="info-box">
-      <span class="title">Üyelik Kartı Kullanım Rehberi</span>
-      <p>
-        /myitemsex (( note kağıdının envanterinizde hangi numarada olduğunu öğrenin))<br><br>
-
-        /note x 1 ad <b>The Oath Beavers - Üyelik Kartı</b>
-        (( x olan kısma envanterinizde note hangisindeyse onu yapın, unutmayın "The Oath Beavers - Üyelik Kartı" kartın adı bu olmak zorunda. ))<br><br>
-
-        /iconpicker yazdıktan sonra önünüze gelen menüde "Diğer" kısmında yer alan üçüncü satırın soldan 4. simgeyi seçin.
-        (( <a href="https://i.imgur.com/GnqvfVc.png" target="_blank">İkon görseli</a> ))<br><br>
-
-        /note x 1 ikon (( bu komut iconpickerdan seçtiğiniz ikonu değiştirmenizi sağlar))<br><br>
-
-        /note x 1 içerik https://i.imgur.com/Assokbk.jpeg
-        (( burada olan imgur linkini sizin için hazırladığınız kart linkiyle değiştirin, imgura yüklenen fotoğrafa sağ tıklayıp “resim adresini kopyala” yaptıktan sonra gelen linki kullanabilirsiniz ))
-      </p>
+      <span class="title"><i class="fas fa-icons"></i></span>
+       <div class="command">/myitemsex</div>
+          <p class="note">
+              Bu komut, envanterinizdeki <span class="important">note kartlarının listesini</span> görmenizi sağlar ve hangi numarada olduğunu öğrenmenize yardımcı olur. Böylece bir sonraki adımlarda doğru kart üzerinde işlem yapabilirsiniz.
+          </p>
+          <div class="command">/note x 1 ad <b>The Oath Beavers - Üyelik Kartı</b></div>
+          <p class="note">
+              Burada <span class="important">"x"</span> yerine envanterinizdeki kartın numarasını yazmanız gerekiyor. Bu komut, seçtiğiniz kartın adını değiştirmeye veya doğrulamaya yarar. Kartın adı mutlaka <span class="important">"The Oath Beavers - Üyelik Kartı"</span> olmalıdır; aksi takdirde sonraki adımlar doğru çalışmaz.
+          </p>
+      </div>
+    
+    <div class="info-box">
+      <span class="title"><i class="fas fa-paint-brush"></i></span>
+       <div class="command">/iconpicker</div>
+          <p class="note">
+              Bu komutu yazdığınızda, önünüze bir ikon seçim menüsü çıkar. Menüde <span class="important">"Diğer"</span> kısmına gidip üçüncü satırın soldan dördüncü simgesini seçmelisiniz. Seçtiğiniz ikon, kartın görsel temsili olarak kullanılacaktır.
+          </p>
+          <div class="command">/note x 1 ikon</div>
+          <p class="note">
+              Bu komut, iconpicker ile seçtiğiniz ikonu kartınıza uygular. Kartın görünümünü kişiselleştirmek ve tanınmasını sağlamak için bu adım önemlidir. <span class="important">"x"</span> yine kartın envanter numarasıdır.
+          </p>
+    </div>
+    <div class="info-box">
+      <span class="title"><i class="fa-solid fa-address-card"></i></span>
+      <div class="command">/note x 1 içerik https://i.imgur.com/Assokbk.jpeg</div>
+        <p class="note">
+            Bu komut, kartın içerisine görsel veya metin eklemenizi sağlar. Buradaki örnek link, imgur üzerinde önceden yüklenmiş bir görseldir. Kendi hazırladığınız kart görselini kullanmak için, resmi imgura yükleyin, sağ tıklayıp “resim adresini kopyala” yapın ve linki buraya yapıştırın. Bu adım, kartın içeriğinin görsel olarak tamamlanmasını sağlar ve kartın hem görünümünü hem de işlevini tamamlar.
+        </p>
     </div>
    </section>
   <!-- ALT BİLGİ / REHBER ALANI -->
