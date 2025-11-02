@@ -43,9 +43,7 @@
 
       <label>ID</label>
       <input type="text" id="idInput" placeholder="Yalnızca Ticket NO">
-
-      <button id="updateBtn" style="margin-top: 2rem;">Önizle</button>
-      <button id="downloadBtn">PNG İndir</button>
+      <button id="downloadBtn" style="margin-top: 2rem;">PNG İndir</button>
     </div>
  <!-- SAĞ TARAF: KART ÖNİZLEME -->
     <div class="preview">
@@ -140,7 +138,11 @@ photoInput.addEventListener('change', e => {
   img.src = url;
 });
 
-document.getElementById('updateBtn').addEventListener('click', render);
+[nameInput, sexInput, serviceInput, idInput].forEach(input => {
+  input.addEventListener('input', render);
+  input.addEventListener('change', render);
+});
+
 document.getElementById('downloadBtn').addEventListener('click', () => {
   canvas.toBlob(blob => {
     const a = document.createElement('a');
