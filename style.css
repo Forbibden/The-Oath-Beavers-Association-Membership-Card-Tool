@@ -1,0 +1,145 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0d0d0d;
+  color: #f0f0f0;
+}
+html{
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+
+}
+section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Ortalamayı sağlayan ana düzen */
+body {
+  display: block; /* Flex'i kaldırıyoruz */
+}
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* tam ekran */
+  padding: 60px 0;
+}
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+
+}
+.card-section {
+  display: flex;
+  gap: 20px;
+  background: #1a1a1a;
+  max-width: 900px;
+  width: 90%;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.preview {
+  flex: 1;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 520px;
+}
+.info-section {
+  margin-top: 80px; /* üst kısımla arayı açar */
+  padding: 60px 0 80px 0;
+    min-height: 100vh;
+  border-top: 1px solid #222;
+  display: flex;
+  justify-content: center;
+}
+.info-box {
+  max-width: 800px;
+  width: 90%;
+  background: #1a1a1a;
+  color: #ccc;
+  padding: 20px 22px;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.info-box .title {
+  display: block;
+  color: cadetblue;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.info-box a {
+  color: #5ebad4;
+  text-decoration: none;
+}
+.info-box a:hover {
+  text-decoration: underline;
+}
+
+label {
+  font-size: 13px;
+  margin-top: 6px;
+  color: #bbb;
+}
+
+input, select {
+  padding: 10px;
+  margin-top: 4px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: #f0f0f0;
+  font-size: 14px;
+  transition: border 0.2s;
+}
+input:focus, select:focus {
+  border: 1px solid cadetblue;
+  outline: none;
+}
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: cadetblue;
+  color: #fff;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #2891c7;
+}
+#downloadBtn {
+  background: #2e7d32;
+}
+#downloadBtn:hover {
+  background: #388e3c;
+}
+
+/* Önizleme */
+
+canvas {
+  max-width: 100%;
+  border-radius: 8px;
+}

@@ -6,123 +6,22 @@
 <link rel="icon" href="oath.png" type="image/png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #0d0d0d;
-  color: #f0f0f0;
-  display: flex;
-  min-height: 100vh;
-}
-.title{
-  color: white;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  max-width: 800px;
-  gap: 20px;
-  margin: auto;
-}
-.card-section {
-  display: flex;
-  gap: 20px;
-  background: #1a1a1a;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-}
-
-/* Kart stili genel */
-.card {
-  background: #1a1a1a;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-  transition: transform 0.2s ease;
-}
-.card:hover {
-  transform: translateY(-3px);
-}
-
-/* Kart Paneli */
-.panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-
-label {
-  font-size: 13px;
-  margin-top: 6px;
-  color: #bbb;
-}
-
-input, select {
-  padding: 10px;
-  margin-top: 4px;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background: #111;
-  color: #f0f0f0;
-  font-size: 14px;
-  transition: border 0.2s;
-}
-input:focus, select:focus {
-  border: 1px solid cadetblue;
-  outline: none;
-}
-
-button {
-  padding: 10px 14px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: cadetblue;
-  color: #fff;
-  font-weight: bold;
-  transition: background 0.2s;
-}
-button:hover {
-  background: #2891c7;
-}
-#downloadBtn {
-  background: #2e7d32;
-}
-#downloadBtn:hover {
-  background: #388e3c;
-}
-
-/* Önizleme */
-.preview {
-  flex: 1;
-  background: #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 520px;
-}
-
-canvas {
-  max-width: 100%;
-  border-radius: 8px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-<div class="container">
-  <div class="card-section">
-    <div class="panel">
-        <span class="title"> Üyelik Kartı Oluştur</span>
-      <label>Fotoğraf</label>
-      <input type="file" id="photoInput" accept="image/*">
+<div class="page-wrapper">
 
+  <section class="hero-section">
+    <div class="card-section">
+
+    <!-- SOL TARAF: FORM PANELİ -->
+    <div class="panel">
+      <span class="title">Üyelik Kartı Oluştur</span>
+
+      <label>Fotoğraf</label>
+      <input class="custom-file-input" type="file" id="photoInput" accept="image/*">
+     
       <label>İsim</label>
       <input type="text" id="nameInput" placeholder="Ad Soyad">
 
@@ -148,13 +47,37 @@ canvas {
       <button id="updateBtn" style="margin-top: 2rem;">Önizle</button>
       <button id="downloadBtn">PNG İndir</button>
     </div>
-
+ <!-- SAĞ TARAF: KART ÖNİZLEME -->
     <div class="preview">
       <canvas id="cardCanvas"></canvas>
     </div>
   </div>
-</div>
 
+  </section>
+
+  <!-- ÜYELİK KARTI OLUŞTURMA BÖLÜMÜ -->
+   <section class="info-section">
+    <div class="info-box">
+      <span class="title">Üyelik Kartı Kullanım Rehberi</span>
+      <p>
+        /myitemsex (( note kağıdının envanterinizde hangi numarada olduğunu öğrenin))<br><br>
+
+        /note x 1 ad <b>The Oath Beavers - Üyelik Kartı</b>
+        (( x olan kısma envanterinizde note hangisindeyse onu yapın, unutmayın "The Oath Beavers - Üyelik Kartı" kartın adı bu olmak zorunda. ))<br><br>
+
+        /iconpicker yazdıktan sonra önünüze gelen menüde "Diğer" kısmında yer alan üçüncü satırın soldan 4. simgeyi seçin.
+        (( <a href="https://i.imgur.com/GnqvfVc.png" target="_blank">İkon görseli</a> ))<br><br>
+
+        /note x 1 ikon (( bu komut iconpickerdan seçtiğiniz ikonu değiştirmenizi sağlar))<br><br>
+
+        /note x 1 içerik https://i.imgur.com/Assokbk.jpeg
+        (( burada olan imgur linkini sizin için hazırladığınız kart linkiyle değiştirin, imgura yüklenen fotoğrafa sağ tıklayıp “resim adresini kopyala” yaptıktan sonra gelen linki kullanabilirsiniz ))
+      </p>
+    </div>
+   </section>
+  <!-- ALT BİLGİ / REHBER ALANI -->
+
+</div>
 <script>
 // Canvas işlemleri
 const canvas = document.getElementById('cardCanvas');
@@ -227,6 +150,7 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
     URL.revokeObjectURL(a.href);
   }, 'image/png');
 });
+
 </script>
 </body>
 </html>
