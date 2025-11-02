@@ -13,7 +13,7 @@
 <div class="page-wrapper">
   <section class="hero-section">
     <div class="warn-box">
-  <i class="fa-solid fa-circle-info"></i> 
+  <i class="fa-solid fa-circle-info" style="color: #2f8fed;"></i> 
   Bu araç, "The Oath Beavers Association" üyelik kartlarını oluşturmak içindir. 
   Her karakterin yanlızca bir adet "The Oath Beavers Association" üyelik kartı bulunabilir.
 </div>
@@ -21,21 +21,24 @@
     <!-- SOL TARAF: FORM PANELİ -->
     <div class="panel">
       <span class="title">Üyelik Kartı Oluştur</span>
-
       <label>Fotoğraf</label>
-      <input class="custom-file-input" type="file" id="photoInput" accept="image/*">
+      <input class="custom-file-input" type="file" id="photoInput" accept="image/*" hidden required>
+      <div class="drop-area">
+        <i class="fa fa-upload"></i>
+    <span>Resmi yüklemek için sürükleyip bırakın veya buraya tıklayın</span>
+</div>
      
       <label>İsim</label>
-      <input type="text" id="nameInput" placeholder="Ad Soyad">
+      <input type="text" id="nameInput" placeholder="Ad Soyad" required value="Jane Doe">
 
       <label>Cinsiyet</label>
-      <select id="sexInput">
+      <select id="sexInput" required>
         <option value="Female">Female</option>
         <option value="Male">Male</option>
       </select>
 
       <label>Servis</label>
-      <select id="serviceInput">
+      <select id="serviceInput" required>
         <option value="District Attorney’s Office">District Attorney’s Office</option>
         <option value="LS County Sheriff's Department">LS County Sheriff's Department</option>
         <option value="LS Police Department">LS Police Department</option>
@@ -45,8 +48,8 @@
       </select>
 
       <label>ID</label>
-      <input type="number" id="idInput" placeholder="Yalnızca Ticket NO">
-      <button id="downloadBtn" style="margin-top: 2rem;">PNG İndir</button>
+      <input type="number" id="idInput" placeholder="Yalnızca Ticket NO" required value="0000">
+      <button id="downloadBtn" type="submit" style="margin-top: 2rem;">PNG İndir</button>
     </div>
  <!-- SAĞ TARAF: KART ÖNİZLEME -->
     <div class="preview">
@@ -59,31 +62,32 @@
   <!-- ÜYELİK KARTI OLUŞTURMA BÖLÜMÜ -->
    <section class="info-section">
     <div class="info-box">
-      <span class="title"><i class="fa-regular fa-paper-plane"></i></span>
-       <div class="command">/myitemsex</div>
+      <span class="title">1</span>
+        <div class="command" id="command">/myitemsex</div>
           <p class="note">
               Bu komut, envanterinizdeki <span class="important">note kartlarının listesini</span> görmenizi sağlar ve hangi numarada olduğunu öğrenmenize yardımcı olur. Böylece bir sonraki adımlarda doğru kart üzerinde işlem yapabilirsiniz.
           </p>
-          <div class="command">/note x 1 ad <b>The Oath Beavers - Üyelik Kartı</b></div>
+          <div class="command" id="command">/note x 1 ad <b>The Oath Beavers - Üyelik Kartı</b></div>
           <p class="note">
-              Burada <span class="important">"x"</span> yerine envanterinizdeki kartın numarasını yazmanız gerekiyor. Bu komut, seçtiğiniz kartın adını değiştirmeye veya doğrulamaya yarar. Kartın adı mutlaka <span class="important">"The Oath Beavers - Üyelik Kartı"</span> olmalıdır; aksi takdirde sonraki adımlar doğru çalışmaz.
+              Burada <span class="important">"x"</span> yerine envanterinizdeki kartın numarasını yazmanız gerekiyor. Bu komut, seçtiğiniz kartın adını değiştirmeye veya doğrulamaya yarar. Kartın adı mutlaka <span class="important">"The Oath Beavers - Üyelik Kartı"</span> olmalıdır.
           </p>
+          
       </div>
     
     <div class="info-box">
-      <span class="title"><i class="fa-regular fa-pen-to-square"></i></span>
-       <div class="command">/iconpicker</div>
+      <span class="title">2</span>
+          <div class="command" id="command">/iconpicker</div>
           <p class="note">
               Bu komutu yazdığınızda, önünüze bir ikon seçim menüsü çıkar. Menüde <span class="important">"Diğer"</span> kısmına gidip üçüncü satırın soldan dördüncü simgesini seçmelisiniz. Seçtiğiniz ikon, kartın görsel temsili olarak kullanılacaktır.
           </p>
-          <div class="command">/note x 1 ikon</div>
+          <div class="command" id="command">/note x 1 ikon</div>
           <p class="note">
               Bu komut, iconpicker ile seçtiğiniz ikonu kartınıza uygular. Kartın görünümünü kişiselleştirmek ve tanınmasını sağlamak için bu adım önemlidir. <span class="important">"x"</span> yine kartın envanter numarasıdır.
           </p>
     </div>
     <div class="info-box">
-      <span class="title"><i class="fa-regular fa-address-card"></i></span>
-      <div class="command">/note x 1 içerik https://i.imgur.com/Assokbk.jpeg</div>
+      <span class="title">3</span>
+      <div class="command" id="command">/note x 1 içerik https://i.imgur.com/Assokbk.jpeg</div>
         <p class="note">
             Bu komut, kartın içerisine görsel veya metin eklemenizi sağlar. Buradaki örnek link, imgur üzerinde önceden yüklenmiş bir görseldir. Kendi hazırladığınız kart görselini kullanmak için, resmi imgura yükleyin, sağ tıklayıp “resim adresini kopyala” yapın ve linki buraya yapıştırın. Bu adım, kartın içeriğinin görsel olarak tamamlanmasını sağlar ve kartın hem görünümünü hem de işlevini tamamlar.
         </p>
@@ -101,6 +105,9 @@ const sexInput = document.getElementById('sexInput');
 const serviceInput = document.getElementById('serviceInput');
 const idInput = document.getElementById('idInput');
 const photoInput = document.getElementById('photoInput');
+const dropArea = document.querySelector('.drop-area');
+const dropText = dropArea.querySelector('span');
+const downloadBtn = document.getElementById('downloadBtn');
 
 let photoImg = null;
 let templateImg = new Image();
@@ -135,7 +142,17 @@ function render() {
   ctx.fillText(serviceInput.value || '', 1000, 910);
   ctx.fillStyle = '#ff0000d9';
   ctx.fillText(idInput.value || '', 1000, 955);
-}
+
+  const canvasEl = document.getElementById("cardCanvas");
+
+  canvasEl.style.opacity = 0;
+  canvasEl.style.transform = 'scale(0.95)';
+
+  setTimeout(() => {
+    canvasEl.style.opacity = 1;
+    canvasEl.style.transform = 'scale(1)';
+  }, 50);
+  }
 
 function drawImageCover(ctx, img, x, y, w, h) {
   const iw = img.width, ih = img.height;
@@ -144,14 +161,49 @@ function drawImageCover(ctx, img, x, y, w, h) {
   const cx = (nw - w) / 2, cy = (nh - h) / 2;
   ctx.drawImage(img, -cx + x, -cy + y, nw, nh);
 }
+function handleFile(file) {
+  if (!file) return;
 
-photoInput.addEventListener('change', e => {
-  const f = e.target.files[0]; 
-  if (!f) return;
-  const url = URL.createObjectURL(f);
+  dropText.textContent = `Dosya Yüklendi: ${file.name}`;
+
   const img = new Image();
-  img.onload = () => { photoImg = img; render(); };
-  img.src = url;
+  img.onload = () => {
+    photoImg = img;
+    render();
+  };
+  img.src = URL.createObjectURL(file);
+}
+dropArea.addEventListener('click', () => {
+  photoInput.click();
+});
+
+// Input değiştiğinde (tıklayıp seçince)
+photoInput.addEventListener('change', (e) => {
+  handleFile(e.target.files[0]);
+});
+
+// Dosya sürükleniyorsa stil değişsin
+dropArea.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  dropArea.style.borderColor = 'cadetblue';
+  dropText.textContent = `Bırak yükle!`;
+});
+
+// Sürükleme iptal edilirse stile geri dön
+dropArea.addEventListener('dragleave', () => {
+  dropArea.style.borderColor = '#333';
+  dropText.textContent = `Resmi yüklemek için sürükleyip bırakın veya buraya tıklayın`;
+});
+
+// Dosya bırakıldığında
+dropArea.addEventListener('drop', (e) => {
+  e.preventDefault();
+  dropArea.style.borderColor = '#333';
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    photoInput.files = e.dataTransfer.files; // input'u güncel tut
+    handleFile(file);
+  }
 });
 
 [nameInput, sexInput, serviceInput, idInput].forEach(input => {
@@ -159,7 +211,37 @@ photoInput.addEventListener('change', e => {
   input.addEventListener('change', render);
 });
 
+function triggerButtonError(){
+  downloadBtn.classList.add('error');
+  setTimeout(() => downloadBtn.classList.remove('error'), 800);
+}
+function validateInputs() {
+  const fields = [
+    { el: photoInput, condition: photoInput.files.length, highlight: dropArea },
+    { el: nameInput, condition: nameInput.value.trim() },
+    { el: idInput, condition: idInput.value.trim() }
+  ];
+
+  let valid = true;
+
+  fields.forEach(f => {
+    if (!f.condition) {
+      valid = false;
+      if (f.highlight) {
+        f.highlight.classList.add('error');
+        setTimeout(() => f.highlight.classList.remove('error'), 800);
+      } else {
+        f.el.classList.add('error');
+        setTimeout(() => f.el.classList.remove('error'), 800);
+      }
+    }
+  });
+
+  if (!valid) triggerButtonError();
+  return valid;
+}
 document.getElementById('downloadBtn').addEventListener('click', () => {
+   if (!validateInputs()) return;
   canvas.toBlob(blob => {
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -169,6 +251,22 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
   }, 'image/png');
 });
 
+document.querySelectorAll('.command').forEach(cmd => {
+  cmd.addEventListener('click', () => {
+    const text = cmd.textContent.trim();
+
+    navigator.clipboard.writeText(text).then(() => {
+      cmd.classList.add('copied');
+      cmd.textContent = 'Panoya Kopyalandı';
+      setTimeout(() => {
+        cmd.classList.remove('copied');
+        cmd.textContent = text;
+      }, 1200);
+    }).catch(() => {
+      alert('Kopyalama başarısız 😢 Tarayıcı izin vermiyor olabilir.');
+    });
+  });
+});
 </script>
 </body>
 </html>
