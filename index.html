@@ -10,6 +10,26 @@
 </head>
 
 <body>
+  <nav class="navbar">
+     <div class="nav-left"></div>
+     <div class="nav-center">
+     <div class="logo">
+      <img src="logo.png" alt="">
+     </div>
+     </div>
+     <div class="nav-right">
+      <button class="nav-btn github" onclick="showLink('Github Profiline Yönlendiriliyorsun...', `https://github.com/Forbibden`)">
+       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub">
+        GitHub
+       </button>
+      </div>
+  </nav>
+  <div id="toast-box"></div>
+  <div class="link-panel" id="linkPanel">
+  <img src="https://avatars.githubusercontent.com/u/63154487?v=4" alt="Profil Fotoğrafı">
+    <h2>Yönlendiriliyorsun...</h2>
+    <span>Github Profiline Yönlendiriliyorsun...</span>
+  </div>
 <div class="page-wrapper">
   <section class="hero-section">
     <div class="warn-box">
@@ -17,8 +37,8 @@
   Bu araç, "The Oath Beavers Association" üyelik kartlarını oluşturmak içindir. 
   Her karakterin yanlızca bir adet "The Oath Beavers Association" üyelik kartı bulunabilir.
 </div>
+<!-- ÜYELİK KARTI OLUŞTURMA BÖLÜMÜ -->
     <div class="card-section">
-    <!-- SOL TARAF: FORM PANELİ -->
     <div class="panel">
       <span class="title">Üyelik Kartı Oluştur</span>
       <label>Fotoğraf</label>
@@ -56,10 +76,9 @@
       <canvas id="cardCanvas"></canvas>
     </div>
   </div>
-
   </section>
 
-  <!-- ÜYELİK KARTI OLUŞTURMA BÖLÜMÜ -->
+  <!-- ÜYELİK KARTI REHBER BÖLÜMÜ -->
    <section class="info-section">
     <div class="info-box">
       <span class="title">1</span>
@@ -87,14 +106,13 @@
     </div>
     <div class="info-box">
       <span class="title">3</span>
-      <div class="command" id="command">/note x 1 içerik https://i.imgur.com/Assokbk.jpeg</div>
+      <div class="command" id="command">/note x 1 içerik url.jpeg</div>
         <p class="note">
             Bu komut, kartın içerisine görsel veya metin eklemenizi sağlar. Buradaki örnek link, imgur üzerinde önceden yüklenmiş bir görseldir. Kendi hazırladığınız kart görselini kullanmak için, resmi imgura yükleyin, sağ tıklayıp “resim adresini kopyala” yapın ve linki buraya yapıştırın. Bu adım, kartın içeriğinin görsel olarak tamamlanmasını sağlar ve kartın hem görünümünü hem de işlevini tamamlar.
         </p>
     </div>
-   </section>
+  </section>
   <!-- ALT BİLGİ / REHBER ALANI -->
-
 </div>
 <script>
 // Canvas işlemleri
@@ -108,9 +126,13 @@ const photoInput = document.getElementById('photoInput');
 const dropArea = document.querySelector('.drop-area');
 const dropText = dropArea.querySelector('span');
 const downloadBtn = document.getElementById('downloadBtn');
+const toastBox = document.getElementById('toast-box');
+const linkPanel = document.getElementById("linkPanel");
+const linkText = linkPanel.querySelector('span');
 
 let photoImg = null;
 let templateImg = new Image();
+
 
 templateImg.onload = () => {
   canvas.width = templateImg.width;
@@ -234,6 +256,7 @@ function validateInputs() {
         f.el.classList.add('error');
         setTimeout(() => f.el.classList.remove('error'), 800);
       }
+      showToast(`Lütfen Boşlukları Uygun Şekilde Doldurun!`);
     }
   });
 
@@ -246,6 +269,7 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = `${nameInput.value}-The Oath Beavers Association.png`;
+    showToast(`${nameInput.value}-The Oath Beavers Association.png İndiriliyor...`)
     a.click();
     URL.revokeObjectURL(a.href);
   }, 'image/png');
@@ -257,16 +281,43 @@ document.querySelectorAll('.command').forEach(cmd => {
 
     navigator.clipboard.writeText(text).then(() => {
       cmd.classList.add('copied');
-      cmd.textContent = 'Panoya Kopyalandı';
+      cmd.textContent = 'Panoya Kopyalandı!';
+      showToast(`"${text}" Kopyalandı!`);
       setTimeout(() => {
         cmd.classList.remove('copied');
         cmd.textContent = text;
       }, 1200);
     }).catch(() => {
-      alert('Kopyalama başarısız 😢 Tarayıcı izin vermiyor olabilir.');
+      showToast('Kopyalama aşarısız!');
     });
   });
 });
+
+function showToast(message, icon='fa-circle-info', duration=3000){
+  const toast = document.createElement('Div');
+  
+  toast.className = 'toast';
+  toast.innerHTML = `<i class="fa-solid ${icon}"></i> ${message}`
+  toastBox.appendChild(toast);
+
+  setTimeout(() => {
+      toast.style.animation = 'toastOut 0.4s forwards';
+      setTimeout(() => toast.remove(), 400);
+  }, duration);
+}
+
+function showLink(message, url){
+  linkText.textContent = `${message}`;
+  linkPanel.classList.add("show");
+
+  setTimeout(() => {
+    window.location.href = `${url}`;
+  }, 3000);
+}
+
+window.addEventListener("pageshow", () => {
+    linkPanel.classList.remove("show");
+  });
 </script>
 </body>
 </html>
