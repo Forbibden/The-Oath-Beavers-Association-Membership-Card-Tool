@@ -8,6 +8,7 @@ html, body {
   justify-content: center;
   align-items: center;
   background: #0d0d0d;
+  user-select: none;
 }
 html{
   scroll-behavior: smooth;
@@ -29,7 +30,7 @@ body {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #0d0d0d;
+  background-color: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,7 +46,16 @@ body {
   display: flex;
   align-items: center;
 }
-
+.nav-left a{
+    text-decoration: none;
+    color: white;
+    margin-right: 8px;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+.nav-left li{
+    list-style-type: none;
+}
 .nav-right {
   justify-content: flex-end;
 }
@@ -364,8 +374,14 @@ button.error {
 
 .toast i {
   font-size: 1rem;
-  color: #2f8fed;
 }
+
+.toast.error i { color: #e53935;}
+.toast.success i { color: #4caf50;}
+.toast.info i { color: #2f8fed;}
+.toast.success { border-left-color: #4caf50; }
+.toast.error { border-left-color: #e53935;}
+.toast.info { border-left-color: #2f8fed; }
 
 @keyframes toastIn {
   to {

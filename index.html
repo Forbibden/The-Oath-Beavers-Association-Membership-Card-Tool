@@ -11,7 +11,8 @@
 
 <body>
   <nav class="navbar">
-     <div class="nav-left"></div>
+     <div class="nav-left">
+     </div>
      <div class="nav-center">
      <div class="logo">
       <img src="logo.png" alt="">
@@ -45,8 +46,8 @@
       <input class="custom-file-input" type="file" id="photoInput" accept="image/*" hidden required>
       <div class="drop-area">
         <i class="fa fa-upload"></i>
-    <span>Resmi yüklemek için sürükleyip bırakın veya buraya tıklayın</span>
-</div>
+        <span>Resmi yüklemek için sürükleyip bırakın veya buraya tıklayın</span>
+      </div>
      
       <label>İsim</label>
       <input type="text" id="nameInput" placeholder="Ad Soyad" required value="Jane Doe">
@@ -69,7 +70,8 @@
 
       <label>ID</label>
       <input type="number" id="idInput" placeholder="Yalnızca Ticket NO" required value="0000">
-      <button id="downloadBtn" type="submit" style="margin-top: 2rem;">PNG İndir</button>
+      <button id="downloadBtn" onclick="downloadCard()" type="submit" style="margin-top: 2rem;"><i class="fa-solid fa-cloud-arrow-down"></i> Kartı İndir</button>
+      <button id="shareBtn"><i class="fa-solid fa-share-nodes"></i> Paylaş</button>
     </div>
  <!-- SAĞ TARAF: KART ÖNİZLEME -->
     <div class="preview">
@@ -129,6 +131,7 @@ const downloadBtn = document.getElementById('downloadBtn');
 const toastBox = document.getElementById('toast-box');
 const linkPanel = document.getElementById("linkPanel");
 const linkText = linkPanel.querySelector('span');
+const shareBtn = document.getElementById("shareBtn");
 
 let photoImg = null;
 let templateImg = new Image();
@@ -199,31 +202,31 @@ dropArea.addEventListener('click', () => {
   photoInput.click();
 });
 
-// Input değiştiğinde (tıklayıp seçince)
+
 photoInput.addEventListener('change', (e) => {
   handleFile(e.target.files[0]);
 });
 
-// Dosya sürükleniyorsa stil değişsin
+
 dropArea.addEventListener('dragover', (e) => {
   e.preventDefault();
   dropArea.style.borderColor = 'cadetblue';
   dropText.textContent = `Bırak yükle!`;
 });
 
-// Sürükleme iptal edilirse stile geri dön
+
 dropArea.addEventListener('dragleave', () => {
   dropArea.style.borderColor = '#333';
   dropText.textContent = `Resmi yüklemek için sürükleyip bırakın veya buraya tıklayın`;
 });
 
-// Dosya bırakıldığında
+
 dropArea.addEventListener('drop', (e) => {
   e.preventDefault();
   dropArea.style.borderColor = '#333';
   const file = e.dataTransfer.files[0];
   if (file) {
-    photoInput.files = e.dataTransfer.files; // input'u güncel tut
+    photoInput.files = e.dataTransfer.files; 
     handleFile(file);
   }
 });
@@ -256,14 +259,49 @@ function validateInputs() {
         f.el.classList.add('error');
         setTimeout(() => f.el.classList.remove('error'), 800);
       }
-      showToast(`Lütfen Boşlukları Uygun Şekilde Doldurun!`);
+      showToast(`Lütfen Boşlukları Uygun Şekilde Doldurun!`, 'error');
     }
   });
 
   if (!valid) triggerButtonError();
   return valid;
 }
-document.getElementById('downloadBtn').addEventListener('click', () => {
+function downloadCard() {
+  if (!validateInputs()) return;
+
+  if (!canvas.toBlob) {
+    showToast('Tarayıcınız bu işlemi desteklemiyor.', 'error');
+    return;
+  }
+
+  canvas.toBlob(blob => {
+    if (!blob) {
+      showToast('Kart oluşturulamadı (blob null).', 'error');
+      return;
+    }
+    const fileUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = 'Kart İndiriliyor...';
+
+    a.href = fileUrl;
+    a.download = `${(nameInput.value || 'card').replace(/\s+/g, '_')}-The_Oath_Beavers.png`;
+
+    showToast(`${a.download} indiriliyor...`, 'info');
+
+    document.body.appendChild(a);
+    a.click();
+
+    setTimeout(() => {
+      URL.revokeObjectURL(fileUrl);
+      a.remove(); 
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = 'Kart İndir';
+    }, 500);
+  }, 'image/png');
+}
+/*document.getElementById('downloadBtn').addEventListener('click', () => {
    if (!validateInputs()) return;
   canvas.toBlob(blob => {
     const a = document.createElement('a');
@@ -274,7 +312,7 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
     URL.revokeObjectURL(a.href);
   }, 'image/png');
 });
-
+*/
 document.querySelectorAll('.command').forEach(cmd => {
   cmd.addEventListener('click', () => {
     const text = cmd.textContent.trim();
@@ -282,7 +320,7 @@ document.querySelectorAll('.command').forEach(cmd => {
     navigator.clipboard.writeText(text).then(() => {
       cmd.classList.add('copied');
       cmd.textContent = 'Panoya Kopyalandı!';
-      showToast(`"${text}" Kopyalandı!`);
+      showToast(`"${text}" Kopyalandı!`, `success`);
       setTimeout(() => {
         cmd.classList.remove('copied');
         cmd.textContent = text;
@@ -293,11 +331,12 @@ document.querySelectorAll('.command').forEach(cmd => {
   });
 });
 
-function showToast(message, icon='fa-circle-info', duration=3000){
+function showToast(message, status, icon='fa-circle-info', duration=3000){
   const toast = document.createElement('Div');
   
   toast.className = 'toast';
   toast.innerHTML = `<i class="fa-solid ${icon}"></i> ${message}`
+  toast.classList.add(`${status}`);
   toastBox.appendChild(toast);
 
   setTimeout(() => {
@@ -312,12 +351,46 @@ function showLink(message, url){
 
   setTimeout(() => {
     window.location.href = `${url}`;
+    linkPanel.classList.remove("show");
   }, 3000);
 }
 
 window.addEventListener("pageshow", () => {
     linkPanel.classList.remove("show");
   });
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter') downloadCard();
+  if (e.key === 'Escape') document.querySelectorAll('.toast').forEach(t => t.remove());
+});
+
+[nameInput, sexInput, serviceInput, idInput].forEach(input => {
+  input.addEventListener('input', () => {
+    localStorage.setItem(input.id, input.value);
+  });
+  const saved = localStorage.getItem(input.id);
+  if (saved) input.value = saved;
+});
+
+shareBtn.addEventListener('click', () => {
+  shareCard();
+});
+
+function shareCard() {
+  canvas.toBlob(async (blob) => {
+    const file = new File([blob], `${nameInput.value}-card.png`, { type: 'image/png' });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        title: 'The Oath Beavers Association',
+        text: `${nameInput.value}'ın üyelik kartı hazır!`,
+        files: [file],
+      });
+    } else {
+      showToast("Bu tarayıcı paylaşımı desteklemiyor!", "fa-triangle-exclamation");
+    }
+  });
+}
 </script>
 </body>
 </html>
