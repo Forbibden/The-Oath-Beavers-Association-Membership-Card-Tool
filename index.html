@@ -376,18 +376,33 @@ shareBtn.addEventListener('click', () => {
   shareCard();
 });
 
-function shareCard() {
+async function shareCard() {
   canvas.toBlob(async (blob) => {
+    if (!blob) {
+      showToast("Kart oluşturulamadı!", "error");
+      return;
+    }
+
     const file = new File([blob], `${nameInput.value}-card.png`, { type: 'image/png' });
 
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      await navigator.share({
-        title: 'The Oath Beavers Association',
-        text: `${nameInput.value}'ın üyelik kartı hazır!`,
-        files: [file],
-      });
+    // platform tespiti
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({
+          title: 'The Oath Beavers Association',
+          text: `${nameInput.value}'ın üyelik kartı hazır!`,
+          files: [file],
+        });
+        showToast("Kart başarıyla paylaşıldı!", "success");
+      } catch (err) {
+        showToast("Paylaşım iptal edildi veya hata oluştu.", "error");
+      }
     } else {
-      showToast("Bu tarayıcı paylaşımı desteklemiyor!", "fa-triangle-exclamation");
+      const fileUrl = URL.createObjectURL(file);
+      await navigator.clipboard.writeText(fileUrl);
+      showToast("Tarayıcı paylaşımı desteklemiyor. Kart bağlantısı panoya kopyalandı!", "info");
     }
   });
 }
